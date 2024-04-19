@@ -39,14 +39,6 @@ def create_location_dataframe(folder_path):
 
     return df
 
-folder_path = "data_moodle/User1/220617"
-
-# Create DataFrame from Location.txt and add metadata
-location_df = create_location_dataframe(folder_path)
-
-# Display the DataFrame
-#print(location_df.head)
-
 # Function to create DataFrame for each folder in User1 and concatenate them
 def create_combined_dataframe(user_folder_path):
     df_total = pd.DataFrame()
@@ -62,11 +54,32 @@ def create_combined_dataframe(user_folder_path):
 
     return df_total
 
-# Folder path containing User1 data
-user1_folder_path = "data_moodle/User1"
 
-# Create combined DataFrame for all folders in User1
-df_location_1 = create_combined_dataframe(user1_folder_path)
+def create_motion_dataframe(folder_path):
+    # Define column names based on the structure of the Torso_Motion file
+    columns = ["Time", "Acc_x", "Acc_y", "Gyro_x", "Gyro_y", "Gyro_z", "Orientation_w",
+               "Orientation_x", "Orientation_y", "Orientation_z", "Gravity_x", "Gravity_y",
+               "Gravity_z", "Linear_acc_x", "Linear_acc_y", "Linear_acc_z", "Pressure",
+               "Altitude", "Temperature"]
+
+    # Read the file into a DataFrame, specifying column names
+    motion_file_path = os.path.join(folder_path, "Torso_Motion.txt")
+    df = pd.read_csv(motion_file_path, sep=' ', header=None, names=columns)
+
+    return df
 
 
-#65012 rows,
+def create_combined_dataframe_motion(user_folder_path):
+    df_total = pd.DataFrame()
+    # Iterate through each folder in User1 directory
+    for folder_name in os.listdir(user_folder_path):
+        folder_path = os.path.join(user_folder_path, folder_name)
+        # Check if the item is a directory
+        if os.path.isdir(folder_path):
+            # Create DataFrame for the current folder
+            df_temp = create_motion_dataframe(folder_path)
+            print(df_temp)
+            df_total = pd.concat([df_total, df_temp])
+# Display the DataFrame
+
+
