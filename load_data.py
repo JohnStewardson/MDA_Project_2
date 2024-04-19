@@ -57,10 +57,11 @@ def create_combined_dataframe(user_folder_path):
 
 def create_motion_dataframe(folder_path):
     # Define column names based on the structure of the Torso_Motion file
-    columns = ["Time", "Acc_x", "Acc_y", "Gyro_x", "Gyro_y", "Gyro_z", "Orientation_w",
-               "Orientation_x", "Orientation_y", "Orientation_z", "Gravity_x", "Gravity_y",
-               "Gravity_z", "Linear_acc_x", "Linear_acc_y", "Linear_acc_z", "Pressure",
-               "Altitude", "Temperature"]
+    columns = ["Time", "Acc_x", "Acc_y", "Acc_z", "Gyro_x", "Gyro_y", "Gyro_z",
+               "Magnetometer_X", "Magnetometer_Y", "Magnetometer_Z", "Orientation_w", "Orientation_x", "Orientation_y",
+               "Orientation_z",
+               "Gravity_x", "Gravity_y", "Gravity_z", "Linear_acc_x", "Linear_acc_y",
+               "Linear_acc_z", "Pressure", "Altitude", "Temperature"]
 
     # Read the file into a DataFrame, specifying column names
     motion_file_path = os.path.join(folder_path, "Torso_Motion.txt")
