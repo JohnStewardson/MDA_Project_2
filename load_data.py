@@ -78,8 +78,58 @@ def create_combined_dataframe_motion(user_folder_path):
         if os.path.isdir(folder_path):
             # Create DataFrame for the current folder
             df_temp = create_motion_dataframe(folder_path)
-            print(df_temp)
+
             df_total = pd.concat([df_total, df_temp])
+
+    return df_total
 # Display the DataFrame
 
+# Exemplary dictionary mapping activity labels to strings (you can adjust as needed)
+activity_mapping = {
+    0: "Still, Stand, Outside",
+    1: "Still, Stand, Inside",
+    2: "Still, Sit, Outside",
+    3: "Still, Sit, Inside",
+    4: "Walking, Inside",
+    5: "Walking, Outside",
+    6: "Run",
+    7: "Bike",
+    8: "Car, Driver",
+    9: "Car, Passenger",
+    10: "Bus, Stand",
+    11: "Bus, Sit",
+    12: "Bus, Up, Stand",
+    13: "Bus, Up, Sit",
+    14: "Train, Stand",
+    15: "Train, Sit",
+    16: "Subway, Stand",
+    17: "Subway, Sit"
+}
 
+# Function to read labels data from file and create DataFrame with activity labels as strings
+def create_labels_dataframe(folder_path, activity_mapping):
+    # Define column names based on the structure of the labels_track_main.txt file
+    columns = ["Start_time", "End_time", "Activity_label"]
+
+    # Read the file into a DataFrame, specifying column names
+    labels_file_path = os.path.join(folder_path, "labels_track_main.txt")
+    df = pd.read_csv(labels_file_path, sep=' ', header=None, names=columns)
+
+    # Map activity labels to strings based on provided dictionary
+    df['Activity_label'] = df['Activity_label'].map(activity_mapping)
+
+    return df
+
+def create_combined_dataframe_label(user_folder_path, activity_mapping):
+    df_total = pd.DataFrame()
+    # Iterate through each folder in User1 directory
+    for folder_name in os.listdir(user_folder_path):
+        folder_path = os.path.join(user_folder_path, folder_name)
+        # Check if the item is a directory
+        if os.path.isdir(folder_path):
+            # Create DataFrame for the current folder
+            df_temp = create_labels_dataframe(folder_path, activity_mapping)
+
+            df_total = pd.concat([df_total, df_temp])
+
+    return df_total
