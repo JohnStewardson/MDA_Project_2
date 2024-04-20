@@ -1,10 +1,23 @@
-To be able to run the code create a virtual environment with Anaconda.
-conda create –name example
-conda activate example
-conda deactivate example
-conda install numpy
-conda install ipykernel
-conda install numpy matplotlib pandas geopandas
-conda install conda-forge::contextily
-conda install conda-forge::geopy
-conda install conda-forge::gpxpy
+
+# Getting started
+## Clone Repository:
+1. Open the terminal
+2. Navigate to the folder where you want to work in
+3. type `git clone https://github.com/JohnStewardson/MDA_Project_2.git`
+4. Check if it was successful by accessing the folder in the terminal or checking the file explorer
+
+## Virtual Environment:
+1. Download Anaconda Distribution  https://www.anaconda.com/download
+2. Create environment:  
+a) with Anaconda prompt:  
+Navigate to the folder  
+`conda create --name mda_01`  
+`conda activate mda_01`  
+`conda install numpy matplotlib pandas geopandas`  
+b) use the Anaconda GUI
+
+## IDE
+To run code it is suggested to get an IDE, for example Pycharm
+1. Download Pycharm
+2. In Pycharm open the project MDA_Project_2
+3. Configure the interpreter to mda_01
