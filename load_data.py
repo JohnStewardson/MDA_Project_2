@@ -23,7 +23,7 @@ def read_metadata(file_path):
 
 def create_location_dataframe(folder_path):
     # Define column names based on the structure of the Location.txt file
-    columns = ["Time_ms", "Accuracy", "Latitude", "Longitude", "Altitude"]
+    columns = ["Time", "Accuracy", "Latitude", "Longitude", "Altitude"]
 
     # Read the file into a DataFrame, specifying column names and skipping the first two columns
     location_file_path = os.path.join(folder_path, "Torso_Location.txt")
